@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model-utils.iml" filepath="$PROJECT_DIR$/.idea/modules/model-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/model-utils-build.iml" filepath="$PROJECT_DIR$/.idea/modules/model-utils-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistent-api.iml" filepath="$PROJECT_DIR$/.idea/modules/persistent-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistent-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/persistent-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistent-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/persistent-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/persistent-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/persistent-impl-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-api.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simple-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/simple-impl-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-akka-integration.iml" filepath="$PROJECT_DIR$/.idea/modules/test-akka-integration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test-akka-integration-build.iml" filepath="$PROJECT_DIR$/.idea/modules/test-akka-integration-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils.iml" filepath="$PROJECT_DIR$/.idea/modules/utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utils-build.iml" filepath="$PROJECT_DIR$/.idea/modules/utils-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wired-api.iml" filepath="$PROJECT_DIR$/.idea/modules/wired-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wired-api-build.iml" filepath="$PROJECT_DIR$/.idea/modules/wired-api-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wired-impl.iml" filepath="$PROJECT_DIR$/.idea/modules/wired-impl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/wired-impl-build.iml" filepath="$PROJECT_DIR$/.idea/modules/wired-impl-build.iml" />
+    </modules>
+  </component>
+</project>

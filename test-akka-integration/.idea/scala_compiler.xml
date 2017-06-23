@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <option name="incrementalityType" value="SBT" />
+    <profile name="SBT 1" modules="test-akka-integration-stream-api,test-akka-integration-stream-impl,test-akka-integration-api,test-akka-integration-impl,test-akka-integration-test-akka-integration-api,test-akka-integration-test-akka-integration-impl,simple-service-api,simple-service-impl,util,simple-simple-service-api,simple-simple-service-impl,test-akka-integration,simple-api,simple-impl,model-utils,wired-api,wired-impl,persistent-api,persistent-impl,utils" />
+  </component>
+</project>

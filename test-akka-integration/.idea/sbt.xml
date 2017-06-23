@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaSbtSettings">
+    <option name="linkedExternalProjectsSettings">
+      <SbtProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="jdk" value="1.8" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/akka-model/simple/api" />
+            <option value="$PROJECT_DIR$/akka-model/simple/api/project" />
+            <option value="$PROJECT_DIR$/akka-model/simple/impl" />
+            <option value="$PROJECT_DIR$/akka-model/simple/impl/project" />
+            <option value="$PROJECT_DIR$/akka-model/utils" />
+            <option value="$PROJECT_DIR$/akka-model/utils/project" />
+            <option value="$PROJECT_DIR$/akka-model/wired/api" />
+            <option value="$PROJECT_DIR$/akka-model/wired/api/project" />
+            <option value="$PROJECT_DIR$/akka-model/wired/impl" />
+            <option value="$PROJECT_DIR$/akka-model/wired/impl/project" />
+            <option value="$PROJECT_DIR$/persistent/api" />
+            <option value="$PROJECT_DIR$/persistent/api/project" />
+            <option value="$PROJECT_DIR$/persistent/impl" />
+            <option value="$PROJECT_DIR$/persistent/impl/project" />
+            <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/utils" />
+            <option value="$PROJECT_DIR$/utils/project" />
+          </set>
+        </option>
+        <option name="remoteDebugPort" value="" />
+        <option name="sbtVersion" value="0.13.13" />
+        <option name="useAutoImport" value="true" />
+        <option name="useOurOwnAutoImport" value="true" />
+      </SbtProjectSettings>
+    </option>
+  </component>
+</project>

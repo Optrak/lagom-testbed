@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="persistent-impl" target="1.8" />
+      <module name="simple-impl" target="1.8" />
+      <module name="simple-service-impl" target="1.8" />
+      <module name="simple-simple-service-impl" target="1.8" />
+      <module name="test-akka-integration-impl" target="1.8" />
+      <module name="test-akka-integration-stream-impl" target="1.8" />
+      <module name="test-akka-integration-test-akka-integration-impl" target="1.8" />
+      <module name="util" target="1.8" />
+      <module name="utils" target="1.8" />
+      <module name="wired-impl" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
