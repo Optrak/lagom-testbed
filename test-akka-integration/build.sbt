@@ -5,6 +5,7 @@ version in ThisBuild := "1.0-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.11"
 
 val macwire = "com.softwaremill.macwire" %% "macros" % "2.2.5" % "provided"
+val softmillCommon = "com.softwaremill.common" %% "tagging" % "2.1.0"
 val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1" % Test
 
 lazy val `test-akka-integration` = (project in file("."))
@@ -89,6 +90,7 @@ lazy val `wired-impl` = (project in file("akka-model/wired/impl"))
       lagomScaladslKafkaBroker,
       lagomScaladslTestKit,
       macwire,
+      softmillCommon,
       scalaTest
     )
   )

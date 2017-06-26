@@ -10,18 +10,16 @@ import akka.pattern._
 import akka.util.Timeout
 import com.optrak.testakka.modelutils.ModelActor
 import com.optrak.testakka.modelutils.ModelActor.{GreetingResponse, Hello}
-import play.api.libs.openid.Errors.AUTH_CANCEL
-
+import com.optrak.testakka.wired.impl.model.{ModelManager, ModelManagerRef}
+import com.softwaremill.macwire._
+import com.softwaremill.tagging._
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.duration._
-
-class WiredServiceImpl(system: ActorSystem, persistentService: PersistentService)
+class WiredServiceImpl(modelManager: ActorRef @@ ModelManagerRef)
+                      (implicit executionContext: ExecutionContext)
                         extends WiredService {
-  implicit def executionContext: ExecutionContext = system.dispatcher
 
   implicit val timeout: Timeout = Timeout(10 seconds)
-  val modelManager = system.actorOf(ModelManager.props(persistentService))
-
   def getActorModel(id: String): Future[ActorRef] = (modelManager ? GetModel(id)).mapTo[ModelRef].map(_.ref)
 
   override def hello(id: String): ServiceCall[NotUsed, String] = ServiceCall { _ =>
@@ -39,29 +37,49 @@ class WiredServiceImpl(system: ActorSystem, persistentService: PersistentService
   }
 }
 
-class ModelManager(persistentService: PersistentService) extends Actor {
-  var modelMap: Map[String, ActorRef] = Map.empty
+package model {
 
-  override def receive: Receive = {
-    case GetModel(id) =>
-      val ref = modelMap.getOrElse(id, newModel(id))
-      sender ! ModelRef(ref)
+  case class WiredModelActor(id: String, persistentService: PersistentService) extends ModelActor
+
+  trait ModelManagerRef
+
+  class ModelManager(modelFactory: ModelFactory) extends Actor {
+    var modelMap: Map[String, ActorRef] = Map.empty
+
+    override def receive: Receive = {
+      case GetModel(id) =>
+        val ref = modelMap.getOrElse(id, modelFactory.createModel(id))
+        sender ! ModelRef(ref)
+    }
   }
 
-  def newModel(id: String): ActorRef =
-    context.actorOf(WiredModelActor.props(id))
+  case class ModelFactory(persistentService: PersistentService,
+                          actorSystem: ActorSystem) {
+    def createModel(id: String): ActorRef = actorSystem.actorOf(Props(wire[WiredModelActor]))
+  }
+
+  class ModelManagerFactory(modelFactory: ModelFactory, actorSystem: ActorSystem) {
+    def createModelManager: ActorRef @@ ModelManagerRef =
+      actorSystem.actorOf(Props(wire[ModelManager])).taggedWith[ModelManagerRef]
+  }
+
+  trait ModelModule {
+    def actorSystem: ActorSystem
+
+    def persistentService : PersistentService
+    lazy val modelFactory = wire[ModelFactory]
+    lazy val modelManagerFactory = wire[ModelManagerFactory]
+  }
 }
 
+
+
 object ModelManager {
-  def props(persistentService: PersistentService) = Props(classOf[ModelManager], persistentService)
 
   case class GetModel(id: String)
 
   case class ModelRef(ref: ActorRef)
+
 }
 
-case class WiredModelActor(id: String, persistentService: PersistentService) extends ModelActor
 
-object WiredModelActor {
-  def props(id: String) = Props(classOf[WiredModelActor], id)
-}

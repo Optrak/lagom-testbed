@@ -11,16 +11,18 @@ import com.lightbend.lagom.scaladsl.broker.kafka.LagomKafkaComponents
 import com.lightbend.lagom.scaladsl.client.LagomServiceClientComponents
 import com.optrak.testakka.api.PersistentService
 import com.optrak.testakka.wired.api.WiredService
+import com.optrak.testakka.wired.impl.model.{ModelManagerRef, ModelModule}
 import com.softwaremill.macwire.{wire, _}
 
 import scala.concurrent.ExecutionContext
 
 trait WiredServiceComponents extends LagomServerComponents
   with CassandraPersistenceComponents
-  with LagomServiceClientComponents {
+  with LagomServiceClientComponents
+with ModelModule {
   implicit def executionContext: ExecutionContext
 
-  implicit lazy val persistentService = serviceClient.implement[PersistentService]
+  override lazy val persistentService = serviceClient.implement[PersistentService]
   override lazy val lagomServer = serverFor[WiredService](wire[WiredServiceImpl])
   override lazy val jsonSerializerRegistry = WiredServiceSerializerRegistry
 }
