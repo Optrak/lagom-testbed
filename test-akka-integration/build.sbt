@@ -9,7 +9,7 @@ val softmillCommon = "com.softwaremill.common" %% "tagging" % "2.1.0"
 val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1" % Test
 
 lazy val `test-akka-integration` = (project in file("."))
-  .aggregate(`persistent-api`, `persistent-impl`)
+  .aggregate(`persistent-api`, `persistent-impl`, `utils`, `simple-api`, `simple-impl`)
 
 lazy val `persistent-api` = (project in file("persistent/api"))
   .settings(
@@ -58,6 +58,7 @@ lazy val `model-utils` = (project in file("akka-model/utils"))
     )
   )
   .dependsOn(`persistent-api`)
+  .dependsOn(`utils`)
 
 lazy val `simple-impl` = (project in file("akka-model/simple/impl"))
   .enablePlugins(LagomScala)
@@ -72,31 +73,7 @@ lazy val `simple-impl` = (project in file("akka-model/simple/impl"))
   )
   .settings(lagomForkedTestSettings: _*)
   .dependsOn(`simple-api`)
+  .dependsOn(`persistent-impl` % "test")
   .dependsOn(`model-utils`)
-
-lazy val `wired-api` = (project in file("akka-model/wired/api"))
-  .settings(
-    libraryDependencies ++= Seq(
-      lagomScaladslApi
-    )
-  )
-  .dependsOn(`persistent-api`)
-
-lazy val `wired-impl` = (project in file("akka-model/wired/impl"))
-  .enablePlugins(LagomScala)
-  .settings(
-    libraryDependencies ++= Seq(
-      lagomScaladslPersistenceCassandra,
-      lagomScaladslKafkaBroker,
-      lagomScaladslTestKit,
-      macwire,
-      softmillCommon,
-      scalaTest
-    )
-  )
-  .settings(lagomForkedTestSettings: _*)
-  .dependsOn(`model-utils`)
-  .dependsOn(`wired-api`)
-
 
 

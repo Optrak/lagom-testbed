@@ -16,12 +16,14 @@ import scala.concurrent.duration._
 
 class SimpleServiceImpl(system: ActorSystem, persistentService: PersistentService)
                         extends SimpleService {
+
   implicit def executionContext: ExecutionContext = system.dispatcher
 
   implicit val timeout: Timeout = Timeout(10 seconds)
   val modelManager = system.actorOf(ModelManager.props(persistentService))
 
   def getActorModel(id: String): Future[ActorRef] = (modelManager ? GetModel(id)).mapTo[ModelRef].map(_.ref)
+
 
   override def hello(id: String): ServiceCall[NotUsed, String] = ServiceCall { _ =>
     for {
@@ -37,6 +39,7 @@ class SimpleServiceImpl(system: ActorSystem, persistentService: PersistentServic
     } yield toldToUse
   }
 }
+
 
 class ModelManager(persistentService: PersistentService) extends Actor {
   var modelMap: Map[String, ActorRef] = Map.empty

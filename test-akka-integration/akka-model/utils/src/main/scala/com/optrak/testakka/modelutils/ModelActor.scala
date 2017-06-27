@@ -1,6 +1,7 @@
 package com.optrak.testakka.modelutils
 
 import ModelActor.{GreetingResponse, Hello, OnlyMessagesBeginningWithHExcpetion}
+import akka.Done
 import akka.actor.Actor
 import com.optrak.testakka.api.{GreetingMessage, PersistentService}
 
@@ -29,6 +30,8 @@ abstract class ModelActor extends Actor {
   // todo - some dodgy use of futures going on here perhaps. Need to check
   override def receive: Receive = {
     case gm: GreetingMessage =>
+      val senderz = sender
+      println(s"got greeting message $gm")
       if (gm.message.startsWith("H"))
         for {
           using <- persistentService.useGreeting(id).invoke(gm)
@@ -37,18 +40,27 @@ abstract class ModelActor extends Actor {
           assert(returned == gm, "not stored")
           cached = Some(returned)
           using
+          senderz ! Done
         }
       else
         throw new OnlyMessagesBeginningWithHExcpetion
     case Hello =>
-      val senderz = sender()
-      val cachedMessage: Future[GreetingMessage] = cached.map { Future.successful(_) }
+      println(s"got a hello")
+      val senderz = sender
+      println(s"sender was $senderz")
+      for {
+        cachedMessage <- cached.map {
+          Future.successful(_)
+        }
           .getOrElse(
             persistentService.getGreeting(id).invoke.map { greeting =>
+              println(s"got a greeting from service $persistentService")
               cached = Some(greeting)
               greeting
             })
-      cachedMessage.foreach { m => senderz ! GreetingResponse(s"${m.message}, $id") }
-    }
+      } yield {
+        println(s"gt cached message $cachedMessage")
+        senderz ! GreetingResponse(s"${cachedMessage.message}, $id!") }
+      }
 }
 
